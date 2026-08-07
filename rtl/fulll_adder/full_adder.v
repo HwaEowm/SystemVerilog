@@ -1,12 +1,12 @@
 // 4bit full adder
 
-module fulladd(A,B,Cin,Q,Co);
+module fulladd(a, b, c_in, q, c_out);
     
-    input A, B, Cin;
-    output Q, Co;
+    input a, b, c_in;
+    output q, c_out;
     
-    assign Q  = A ^ B ^ Cin;
-    assign Co = (A & B) | (A & Cin) | (B & Cin);
+    assign q  = a ^ b ^ c_in;
+    assign c_out = (a & b) | (a & c_in) | (b & c_in);
     
 endmodule
     
