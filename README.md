@@ -1,0 +1,2 @@
+# Verilog
+Practicing Verilog basics.
