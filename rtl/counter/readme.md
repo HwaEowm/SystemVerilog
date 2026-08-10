@@ -90,7 +90,25 @@ endmodule
 
 ## Design 2
 
-**Design 1** 은 하위 모듈 내부에서 현재 출력 상태와 carry out 을 연산하는 기능을 구체화한 것이다. 목표는 뒷단 모듈로 carry 를 넘겨줘 그것을 현재 상태와 더하는 것인데, 이런 가산 기능은 추상화된 연산자 `+` 로 사용이 가능하다.
+**Design 1** 은 하위 모듈 내부에서 현재 출력 상태와 이전 모듈의 carry out 을 연산하는 기능을 구체화한 것이다. 목표는 뒷단 모듈로 carry 를 넘겨줘 그것을 현재 상태와 더하는 것인데, 이런 가산 기능은 추상화된 연산자 `+` 로 사용이 가능하다.
 
+[counter(adder).v](/rtl/counter/counter(adder).v)
+
+``` Verilog
+    always @(posedge clk or posedge reset) begin
+        // Asynchronous input
+        if (reset == 1'b1)
+            // 4'h0 : 4bit 0x0 = 0000(2)
+            q <= 4'h0;
+        
+        else
+            // 4'h1 : 4bit 0x1 = 0001(2)
+            q <= q + 4'h1;
+    end
+```
+
+코드의 핵심은 `else` 문에서 `q` 의 현재 상태와 4bit 1 을 더한 것을 할당하는 것이다. `q` 는 4bit 이기 때문에 `4'h1` 을 더한다. 또는 2진수로 가중치를 고려한다면 `4'h1` 대신 `4'b0001` 이라고 쓰는 것도 가능하다.
+
+## Syntax Note
 
 
