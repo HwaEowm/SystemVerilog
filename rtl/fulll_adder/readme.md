@@ -23,9 +23,13 @@
 
 `Co = AB + ACin + BCin`
 
-## Design 1
+## Design
 
 상술한 진리표를 통해 하위 모듈을 생성한 후 직렬로 이어붙이는 방식으로 구현이 가능하다.
+
+<br>
+
+![full_adder.png](/images/circuits/full_adder.png)
 
 [full_adder.v](full_adder.v)
 
@@ -64,9 +68,6 @@ endmodule
 
 4 bit 연산을 위해 앞서 선언한 `fulladd` 하위 모듈 4개를 인스턴스화 한다. `co` 신호를 통해 앞단 하위 모듈의 carry out 이 뒷단 하위 모듈의 carry in 으로 할당되도록 결선한다. 맨 앞단 모듈의 carry in 은 0 이 입력되어야 하므로 `1'b0` (binary 1 bit 0) 를 인가한다.'
 
-## Design 2
-
-Verilog 에는 Cell Library 라는 것이 있으며, Vendor 에서 해당 기능을 가지는 회로 구성을 미리 최적화하여 모듈화한 것을 라이브러리로써 제공한다. 이를 활용하여 진리표를 통한 유도 없이 간단하게 전가산기 모듈을 구현하는 것이 가능하다.
 
 
 ## Syntax Note
