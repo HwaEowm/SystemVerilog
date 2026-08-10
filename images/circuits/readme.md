@@ -1,2 +1,4 @@
 # /circuits
 논리 게이트 등 소자를 이용한 회로도를 올리는 곳입니다.
+
+Designed by PSpice for TI.
