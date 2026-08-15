@@ -16,11 +16,10 @@
 
 ### Top-Level architecture
 
-![4_bit_ripple_counter](images/circuits/4bit_ripple_counter.png)
+![4_bit_ripple_counter](/images/circuits/4bit_ripple_counter.png)
 
 ### RTL Synthesis result
-
-![counter_cell](images/rtl_schematic/counter_cell.png)
+![counter_cell](/images/rtl_schematic/counter_cell.png)
 
 ### State Diagram
 
