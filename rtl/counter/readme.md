@@ -14,6 +14,16 @@
 
 [counter(instance).v](/rtl/counter/counter(instance).v)
 
+### Top-Level architecture
+
+![4_bit_ripple_counter](images/circuits/4bit_ripple_counter.png)
+
+### RTL Synthesis result
+
+![counter_cell](images/rtl_schematic/counter_cell.png)
+
+### State Diagram
+
 ```mermaid
 stateDiagram-v2
     direction LR
@@ -68,7 +78,7 @@ module cnt_unit(clk, reset, en, q, co);
 endmodule
 ```
 
-1 bit 카운터 하위 모듈을 구현한 순차논리회로로, `posedge` 로 rising edge 시에 동작하도록 설계했다. 
+1 bit binary 카운터 하위 모듈을 구현한 순차논리회로로, `posedge` 로 rising edge 시에 동작하도록 설계했다. 
 
 ### 4 bit ripple counter (상위 모듈)
 
@@ -111,4 +121,18 @@ endmodule
 
 ## Syntax Note
 
+### always statement
 
+`always` 문은 그 이후에 오는 `@ (sensitivity list)` 의 조건에 따라 그 이후에 오는 문(statement)을 실행한다.
+
+HDL 이 여타 프로그래밍 언어와 가장 다른 점은 병렬적으로 처리할 수 있다는 것이다. 이후에 오는 신호가 순차논리회로라면 `<= (non-blocking assignment)` 로 신호를 할당하며, 병렬적으로 처리한다. 이후에 오는 신호가 CL이면 `= (blocking assignment)` 로 신호를 할당하며, 순자척으로 처리한다.
+
+특히 CL 신호 할당을 위해 `always` 문을 사용할 때는 `always @ (*)` 으로 쓰며, `sensitivity list` 가 특정되지 않아 그 이후에 오는 모든 신호의 변화에 반응하여 실행된다. system verilog 에서는 유지보수의 편의성을 위해 `always_comb` 라고 표기한다.
+
+### type
+
+Verilog 에는 주로 2가지 형(type)이 있으며, `reg` 와 `net` 형이 있다. `net` 형은 `wire`, `tri` 등이 포함되어 있으며 레지스터를 생성하지 않고 합성시 물리적인 도선을 만든다.
+
+`reg` 형은 정보를 저장하는 능력이 있고, 기본적으로 `always` 문의 할당 대상 신호는 순차논리회로이든 CL이든 문법적으로 모두 `reg` 형이어야만 한다. 이런 특성 때문에 실제로 합성시 `reg` 형으로 선언한 변수가 물리적인 레지스터를 생성하지 않고 CL로 구성될 수 있다. 가령 `always` 문 내 `if-else` 문으로 MUX 기능을 구현한다면 실제 합성시 CL로 구성된다.
+
+System Verilog 에서는 이러한 혼란을 방지하기 위해 `wire` 와 `reg` 형을 통합한 `logic` 형을 사용하며, `net` 형은 다중 드라이버를 위해 사용한다(`tri` 등).
