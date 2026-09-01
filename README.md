@@ -1,14 +1,14 @@
-# Verilog
-Practicing Verilog basics.
+# SystemVerilog
+Practicing SystemVerilog basics.
 
 ## Environment
-  • OS : Windows 11
+  • OS : Windows 11 Home
   
-  • Language : Verilog 2001 (IEEE 1364-2001)
+  • Language : SystemVerilog IEEE 1800-2023
   
-  • Target Board : Xilinx Spartan 6
+  • Target Board : Arty A7-100T
   
-  • EDA Tool : Xilinx ISE 14.7 (running on Virtual Box)
+  • EDA Tool : AMD Vivado Design Suite
 
 
 ## Directory
