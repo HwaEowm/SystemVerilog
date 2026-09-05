@@ -12,14 +12,14 @@
 
 하위 모듈을 인스턴스화 하여 상위 모듈에서 직렬로 연결한 4bit 카운터 회로 설계이다.
 
-[counter(instance).v](/rtl/counter/counter(instance).v)
+[counter_instance.sv](/rtl/counter/counter_instance.sv)
 
 ### Top-Level architecture
 
 ![4_bit_ripple_counter](/images/circuits/4bit_ripple_counter.png)
 
 ### RTL Synthesis result
-![counter_cell](/images/rtl_schematic/counter_cell.png)
+![counter](/images/rtl_schematic/counter.svg)
 
 ### State Diagram
 
@@ -58,11 +58,10 @@ flowchart LR
 
 ### 1 bit counter (하위 모듈)
 
-``` Verilog
+``` SystemVerilog
 module cnt_unit(clk, reset, en, q, co);
     input clk, reset, en;
-    output q, co;
-    reg q;
+    output logic q, co;
 
     always @ (posedge clk or posedge reset) begin
         if (reset == 1'b1)
@@ -81,11 +80,11 @@ endmodule
 
 ### 4 bit ripple counter (상위 모듈)
 
-``` Verilog
+``` SystemVerilog
 module counter_cell(clk, reset, q);
     input clk, reset;
-    output [3:0] q;
-    wire [3:0] co;
+    output logic [3:0] q;
+    logic [3:0] co;
 
     cnt_unit cu0(.clk(clk), .reset(reset), .en(1'b1), .q(q[0]), .co(co[0]));
     cnt_unit cu1(.clk(clk), .reset(reset), .en(co[0]), .q(q[1]), .co(co[1]));
@@ -101,10 +100,10 @@ endmodule
 
 **Design 1** 은 하위 모듈 내부에서 현재 출력 상태와 이전 모듈의 carry out 을 연산하는 기능을 구체화한 것이다. 목표는 뒷단 모듈로 carry 를 넘겨줘 그것을 현재 상태와 더하는 것인데, 이런 가산 기능은 추상화된 연산자 `+` 로 사용이 가능하다.
 
-[counter(adder).v](/rtl/counter/counter(adder).v)
+[counter_adder.sv](/rtl/counter/counter_adder.sv)
 
 ``` Verilog
-    always @(posedge clk or posedge reset) begin
+    always @ (posedge clk or posedge reset) begin
         // Asynchronous input
         if (reset == 1'b1)
             // 4'h0 : 4bit 0x0 = 0000(2)
