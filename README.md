@@ -1,14 +1,14 @@
-# Verilog
-Practicing Verilog basics.
+# SystemVerilog
+Practicing SystemVerilog basics.
 
 ## Environment
-  • OS : Windows 11
+  • OS : Windows 11 Home
   
-  • Language : Verilog 2001 (IEEE 1364-2001)
+  • Language : SystemVerilog IEEE 1800-2023
   
-  • Target Board : Xilinx Spartan 6
+  • Target Board : Arty A7-100T
   
-  • EDA Tool : Xilinx ISE 14.7 (running on Virtual Box)
+  • EDA Tool : AMD Vivado Design Suite
 
 
 ## Directory
@@ -17,3 +17,6 @@ Practicing Verilog basics.
   • '/rtl' : 합성가능한 RTL 단계 코드 저장
   
   • '/tb' : Testbench 코드 저장
+
+## Note
+Verilog 문법은 SystemVerilog 에서 모두 지원합니다. 본 Repository 에서 Verilog 라 명시된 부분은 모두 SystemVerilog 에서 사용 가능합니다.

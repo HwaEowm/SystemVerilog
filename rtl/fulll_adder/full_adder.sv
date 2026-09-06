@@ -1,22 +1,18 @@
 // 4bit full adder
-
 module fulladd(a, b, c_in, q, c_out);
-    
-    input a, b, c_in;
-    output q, c_out;
+    input logic a, b, c_in;
+    output logic q, c_out;
     
     assign q  = a ^ b ^ c_in;
     assign c_out = (a & b) | (a & c_in) | (b & c_in);
     
 endmodule
     
-    
-// adder_ripple
-    
+// RCA(Ripple Carry Adder)
 module adder_ripple(a, b, q);
-    input [3:0] a, b;
-    output [3:0] q;
-    wire [3:0] co;
+    input logic [3:0] a, b;
+    output logic [3:0] q;
+    logic [3:0] co;
 
     // making instances
     // 1'b0 : means binary 1 bit '0'

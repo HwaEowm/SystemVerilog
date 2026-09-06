@@ -1,19 +1,18 @@
 module alu (a_in, b_in, s_in, y_out, n_out, z_out, c_out, v_out);
-    input signed [7:0] a_in, b_in;
-    input [2:0] s_in; // select signal
-    output reg signed [7:0] y_out; // output
+    input logic signed [7:0] a_in, b_in;
+    input logic [2:0] s_in; // select signal
+    output logic signed [7:0] y_out; // output
     // flags
-    output reg c_out, v_out, z_out;
-    output n_out;
+    output logic c_out, v_out, z_out, n_out;
 
-    always @ (*) begin
+    always_comb begin
         c_out = 1'b0;
         v_out = 1'b0;
         y_out = 8'b0;
 
         // addition
         if (s_in == 3'b000) begin
-            {c_out, y_out} = a_in + b_in;
+            {c_out, y_out} = {1'b0, a_in} + {1'b0, b_in};
             v_out = (a_in[7] ^~ b_in[7]) & (a_in[7] ^ y_out[7]);
         end
 

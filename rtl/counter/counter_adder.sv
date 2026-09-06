@@ -1,14 +1,11 @@
 // 4bit binary counter by addition operator
 
 module counter(clk, reset, q);
-    
     input clk, reset;
-    output [3:0] q;
-    reg [3:0] q;
-    // reg : Type declaration, register type
+    output logic [3:0] q;
     
     // posedge : positive edge(rising edge)
-    always @(posedge clk or posedge reset) begin
+    always @ (posedge clk or posedge reset) begin
         // Asynchronous input
         if (reset == 1'b1)
             // 4'h0 : 4bit 0x0 = 0000(2)

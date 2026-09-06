@@ -31,17 +31,16 @@
 
 ![full_adder.png](/images/circuits/full_adder.png)
 
-[full_adder.v](full_adder.v)
+[full_adder.sv](full_adder.sv)
 
 위의 코드는 전가산기 모듈을 직렬 연결하여 4bit 전가산기를 구현한 것이다.
 
 ### 1 bit Full Adder (하위 모듈)
 
-``` verilog
+``` SystemVerilog
 module fulladd(a, b, c_in, q, c_out);
-    
-    input a, b, c_in;
-    output q, c_out;
+    input logic a, b, c_in;
+    output logic q, c_out;
     
     assign q  = a ^ b ^ c_in;
     assign c_out = (a & b) | (a & c_in) | (b & c_in);
@@ -51,14 +50,17 @@ endmodule
 
 1 bit 입력 3개를 받아 그 합과 Carry out 을 출력하는 조합논리회로(이하 CL) 모듈이다.
 
-### 4 bit ripple adder (상위 모듈)
+### 4 bit RCA(Ripple Carry Adder) 상위 모듈
 
-``` verilog
+``` SystemVerilog
+// RCA(Ripple Carry Adder)
 module adder_ripple(a, b, q);
-    input [3:0] a, b;
-    output [3:0] q;
-    wire [3:0] co;
+    input logic [3:0] a, b;
+    output logic [3:0] q;
+    logic [3:0] co;
 
+    // making instances
+    // 1'b0 : means binary 1 bit '0'
     fulladd add0 (.a(a[0]), .b(b[0]), .c_in(1'b0),  .q(q[0]), .c_out(co[0]));
     fulladd add1 (.a(a[1]), .b(b[1]), .c_in(co[0]), .q(q[1]), .c_out(co[1]));
     fulladd add2 (.a(a[2]), .b(b[2]), .c_in(co[1]), .q(q[2]), .c_out(co[2]));
