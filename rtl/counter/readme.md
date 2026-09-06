@@ -18,7 +18,7 @@
 
 ![4_bit_ripple_counter](/images/circuits/4bit_ripple_counter.png)
 
-### RTL Synthesis result
+### RTL Synthesis Schematic
 ![counter](/images/rtl_schematic/counter.svg)
 
 ### State Diagram
