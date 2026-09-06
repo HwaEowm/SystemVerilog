@@ -3,8 +3,7 @@ module alu (a_in, b_in, s_in, y_out, n_out, z_out, c_out, v_out);
     input logic [2:0] s_in; // select signal
     output logic signed [7:0] y_out; // output
     // flags
-    output logic c_out, v_out, z_out;
-    output logic n_out;
+    output logic c_out, v_out, z_out, n_out;
 
     always_comb begin
         c_out = 1'b0;
